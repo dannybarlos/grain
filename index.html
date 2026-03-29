@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grain — Pretext Interactive Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: #0e0e0f;
+      color: #d4cfc7;
+      font-family: Georgia, 'Times New Roman', serif;
+    }
+
+    #stage {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Canvas sits behind text */
+    #canvas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    /* DOM text pool */
+    .line {
+      position: absolute;
+      white-space: nowrap;
+      line-height: 1;
+      pointer-events: none;
+      color: #c8c2b8;
+      font-size: 15px;
+      letter-spacing: 0.01em;
+    }
+
+    /* UI panel */
+    #panel {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-end;
+    }
+
+    #panel-toggle {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #c8c2b8;
+      font-family: inherit;
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    #panel-toggle:hover { background: rgba(255,255,255,0.14); }
+
+    #panel-body {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      background: rgba(14,14,15,0.92);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      padding: 12px;
+      width: 260px;
+    }
+    #panel-body.open { display: flex; }
+
+    #panel-body label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: rgba(200,194,184,0.55);
+    }
+
+    #text-input {
+      width: 100%;
+      height: 120px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      color: #c8c2b8;
+      font-family: Georgia, serif;
+      font-size: 12px;
+      padding: 8px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+    #text-input:focus { outline: none; border-color: rgba(255,255,255,0.25); }
+
+    #hint {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      font-size: 11px;
+      color: rgba(200,194,184,0.35);
+      letter-spacing: 0.04em;
+      pointer-events: none;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div id="stage">
+    <canvas id="canvas"></canvas>
+  </div>
+
+  <div id="panel">
+    <button id="panel-toggle">Edit text</button>
+    <div id="panel-body">
+      <label for="text-input">Text content</label>
+      <textarea id="text-input" spellcheck="false"></textarea>
+    </div>
+  </div>
+
+  <div id="hint">
+    Drag circles &nbsp;·&nbsp; Move mouse to repel
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
